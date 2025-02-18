@@ -2,6 +2,7 @@ package com.egg.jpa.libreria.entidades;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -17,9 +18,9 @@ public class Libro {
     private Integer anno;
     private Integer ejemplares;
     private boolean alta;
-    @OneToOne
+    @ManyToOne
     private Autor autor;
-    @OneToOne
+    @ManyToOne
     private Editorial editorial;
 
 

@@ -2,6 +2,8 @@ package com.egg.jpa.libreria.entidades;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -11,15 +13,16 @@ import lombok.Data;
 @Data
 public class Libro {
         //Atributos de Libro
+    @Id
     @Column(name = "isbn")
     private Long id;
     private String titulo;
     private Integer anno;
     private Integer ejemplares;
     private boolean alta;
-    @OneToOne
+    @ManyToOne
     private Autor autor;
-    @OneToOne
+    @ManyToOne
     private Editorial editorial;
 
 

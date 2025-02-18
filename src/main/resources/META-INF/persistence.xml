@@ -9,9 +9,9 @@
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
             <!--Propiedades de conexión-->
         <properties>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/integrador_libreria_egg?serverTimezone=America/Bogota"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/integrador_libreria_egg?serverTimezone=America/Argentina/Buenos_Aires"/>
             <property name="jakarta.persistence.jdbc.user" value="root"/>
-            <property name="jakarta.persistence.jdbc.password" value="sasa"/>
+            <property name="jakarta.persistence.jdbc.password" value="richards"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
             <property name="hibernate.show_sql" value="true"/>

@@ -17,6 +17,6 @@ public class JPAUtil {
 
         //Métodos de JPAUtil
     private static EntityManagerFactory buildEntityManagerFactory() {
-        return Persistence.createEntityManagerFactory("EjemploJPA");
+        return Persistence.createEntityManagerFactory("IntegradorJPA");
     }
 }

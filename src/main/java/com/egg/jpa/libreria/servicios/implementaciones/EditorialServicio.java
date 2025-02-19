@@ -1,5 +1,6 @@
 package com.egg.jpa.libreria.servicios.implementaciones;
 
+import com.egg.jpa.libreria.DAOs.abstracciones.CRUD_DAO;
 import com.egg.jpa.libreria.DAOs.implementaciones.EditorialDAO;
 import com.egg.jpa.libreria.entidades.Editorial;
 import com.egg.jpa.libreria.servicios.abstracciones.CRUD_Servicio;
@@ -11,12 +12,12 @@ import java.util.Optional;
 public class EditorialServicio implements CRUD_Servicio<Editorial> {
         //Atributos de EditorialServicio
     private EntityManager em;
-    private final EditorialDAO repoEditorial;
+    private final CRUD_DAO<Editorial> repoEditorial;
 
         //Constructores de EditorialServicio
-    public EditorialServicio(EditorialDAO repoEditorial, EntityManager entityManager) {
+    public EditorialServicio(EntityManager entityManager) {
         this.em = entityManager;
-        this.repoEditorial = repoEditorial;
+        this.repoEditorial = new EditorialDAO(this.em);
     }
 
     //Asignadores de atributos de EditorialServicio (setters)

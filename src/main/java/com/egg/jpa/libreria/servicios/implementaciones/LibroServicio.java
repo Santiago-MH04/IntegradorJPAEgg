@@ -1,5 +1,6 @@
 package com.egg.jpa.libreria.servicios.implementaciones;
 
+import com.egg.jpa.libreria.DAOs.abstracciones.CRUD_DAO;
 import com.egg.jpa.libreria.DAOs.implementaciones.LibroDAO;
 import com.egg.jpa.libreria.entidades.Libro;
 import com.egg.jpa.libreria.servicios.abstracciones.CRUD_Servicio;
@@ -11,12 +12,12 @@ import java.util.Optional;
 public class LibroServicio implements CRUD_Servicio<Libro> {
         //Atributos de LibroServicio
     private EntityManager em;
-    private final LibroDAO repoLibro;
+    private final CRUD_DAO<Libro> repoLibro;
 
         //Constructores de LibroServicio
-    public LibroServicio(LibroDAO repoLibro, EntityManager entityManager) {
+    public LibroServicio(EntityManager entityManager) {
         this.em = entityManager;
-        this.repoLibro = repoLibro;
+        this.repoLibro = new LibroDAO(this.em);
     }
 
 

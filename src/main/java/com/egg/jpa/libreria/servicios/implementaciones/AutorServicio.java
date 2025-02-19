@@ -1,5 +1,6 @@
 package com.egg.jpa.libreria.servicios.implementaciones;
 
+import com.egg.jpa.libreria.DAOs.abstracciones.CRUD_DAO;
 import com.egg.jpa.libreria.DAOs.implementaciones.AutorDAO;
 import com.egg.jpa.libreria.entidades.Autor;
 import com.egg.jpa.libreria.servicios.abstracciones.CRUD_Servicio;
@@ -11,12 +12,12 @@ import java.util.Optional;
 public class AutorServicio implements CRUD_Servicio<Autor> {
         //Atributos de AutorServicio
     private EntityManager em;
-    private final AutorDAO repoAutor;
+    private final CRUD_DAO<Autor> repoAutor;
 
         //Constructores de AutorServicio
-    public AutorServicio(AutorDAO repoAutor, EntityManager entityManager) {
+    public AutorServicio(EntityManager entityManager) {
         this.em = entityManager;
-        this.repoAutor = repoAutor;
+        this.repoAutor = new AutorDAO(this.em);
     }
 
     //Asignadores de atributos de AutorServicio (setters)

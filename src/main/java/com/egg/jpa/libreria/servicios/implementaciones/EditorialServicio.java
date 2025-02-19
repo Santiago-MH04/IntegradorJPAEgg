@@ -25,21 +25,35 @@ public class EditorialServicio implements CRUD_Servicio<Editorial> {
         //Métodos de EditorialServicio
     @Override
     public List<Editorial> listarTodos() {
-        return List.of();
+        return this.repoEditorial.listarTodos();
     }
 
     @Override
     public Optional<Editorial> buscarPorID(Long id) {
-        return Optional.empty();
+        return this.repoEditorial.buscarPorID(id);
     }
 
     @Override
-    public Editorial guardar(Editorial editorial) {
-        return null;
+    public void guardar(Editorial editorial) {
+        try {
+            this.em.getTransaction().begin();
+            this.repoEditorial.guardar(editorial);
+            this.em.getTransaction().commit();
+        } catch (Exception e) {
+            this.em.getTransaction().rollback();
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void eliminar(Long id) {
-
+        try {
+            this.em.getTransaction().begin();
+            this.repoEditorial.eliminar(id);
+            this.em.getTransaction().commit();
+        } catch (Exception e) {
+            this.em.getTransaction().rollback();
+            throw new RuntimeException(e);
+        }
     }
 }

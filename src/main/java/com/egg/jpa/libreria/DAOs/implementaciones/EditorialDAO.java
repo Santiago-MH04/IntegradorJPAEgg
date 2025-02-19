@@ -1,6 +1,7 @@
 package com.egg.jpa.libreria.DAOs.implementaciones;
 
 import com.egg.jpa.libreria.DAOs.abstracciones.CRUD_DAO;
+import com.egg.jpa.libreria.entidades.Autor;
 import com.egg.jpa.libreria.entidades.Editorial;
 import jakarta.persistence.EntityManager;
 
@@ -21,21 +22,27 @@ public class EditorialDAO implements CRUD_DAO<Editorial> {
         //Métodos de EditorialDAO
     @Override
     public List<Editorial> listarTodos() {
-        return List.of();
+        return this.em.createQuery("select e from Editorial e", Editorial.class).getResultList();
     }
 
     @Override
     public Optional<Editorial> buscarPorID(Long id) {
-        return Optional.empty();
+        return Optional.of(this.em.find(Editorial.class, id));
     }
 
     @Override
     public Editorial guardar(Editorial editorial) {
-        return null;
+            //Ver que Editorial tenga un id no nulo, o mayor que 0
+        if(editorial.getId() == null || editorial.getId().equals(0)){
+            this.em.persist(editorial);
+        } else {
+            this.em.merge(editorial);
+        }
+        return editorial;
     }
 
     @Override
     public void eliminar(Long id) {
-
+        this.buscarPorID(id).ifPresent(a -> this.em.remove(a));
     }
 }

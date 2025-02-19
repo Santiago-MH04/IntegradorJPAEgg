@@ -36,12 +36,26 @@ public class LibroServicio implements CRUD_Servicio<Libro> {
     }
 
     @Override
-    public Libro guardar(Libro libro) {
-        return null;
+    public void guardar(Libro libro) {
+        try {
+            this.em.getTransaction().begin();
+            this.repoLibro.guardar(libro);
+            this.em.getTransaction().commit();
+        } catch (Exception e) {
+            this.em.getTransaction().rollback();
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void eliminar(Long id) {
-
+        try {
+            this.em.getTransaction().begin();
+            this.repoLibro.eliminar(id);
+            this.em.getTransaction().commit();
+        } catch (Exception e) {
+            this.em.getTransaction().rollback();
+            throw new RuntimeException(e);
+        }
     }
 }

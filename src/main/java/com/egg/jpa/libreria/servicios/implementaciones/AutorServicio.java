@@ -26,21 +26,35 @@ public class AutorServicio implements CRUD_Servicio<Autor> {
 
     @Override
     public List<Autor> listarTodos() {
-        return List.of();
+        return this.repoAutor.listarTodos();
     }
 
     @Override
     public Optional<Autor> buscarPorID(Long id) {
-        return Optional.empty();
+        return this.repoAutor.buscarPorID(id);
     }
 
     @Override
-    public Autor guardar(Autor autor) {
-        return null;
+    public void guardar(Autor autor) {
+        try {
+           this.em.getTransaction().begin();
+           this.repoAutor.guardar(autor);
+           this.em.getTransaction().commit();
+        } catch (Exception e) {
+            this.em.getTransaction().rollback();
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void eliminar(Long id) {
-
+        try {
+            this.em.getTransaction().begin();
+            this.repoAutor.eliminar(id);
+            this.em.getTransaction().commit();
+        } catch (Exception e) {
+            this.em.getTransaction().rollback();
+            throw new RuntimeException(e);
+        }
     }
 }

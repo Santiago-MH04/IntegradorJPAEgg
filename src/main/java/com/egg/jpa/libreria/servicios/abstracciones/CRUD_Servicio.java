@@ -11,6 +11,6 @@ public interface CRUD_Servicio<T> {
         //Métodos de CRUD_Servicio
     List<T> listarTodos();
     Optional<T> buscarPorID(Long id);
-    T guardar(T t); //Este método debe guardar uno nuevo, o modificar una instancia existente
+    void guardar(T t); //Este método debe guardar uno nuevo, o modificar una instancia existente
     void eliminar(Long id);
 }

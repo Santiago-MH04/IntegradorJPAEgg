@@ -1,6 +1,7 @@
 package com.egg.jpa.libreria.DAOs.implementaciones;
 
 import com.egg.jpa.libreria.DAOs.abstracciones.CRUD_DAO;
+import com.egg.jpa.libreria.entidades.Editorial;
 import com.egg.jpa.libreria.entidades.Libro;
 import jakarta.persistence.EntityManager;
 
@@ -21,21 +22,27 @@ public class LibroDAO implements CRUD_DAO<Libro> {
         //Métodos de LibroDAO
     @Override
     public List<Libro> listarTodos() {
-        return List.of();
+        return this.em.createQuery("select l from Libro l", Libro.class).getResultList();
     }
 
     @Override
     public Optional<Libro> buscarPorID(Long id) {
-        return Optional.empty();
+        return Optional.of(this.em.find(Libro.class, id));
     }
 
     @Override
     public Libro guardar(Libro libro) {
-        return null;
+            //Ver que Libro tenga un id no nulo, o mayor que 0
+        if(libro.getId() == null || libro.getId().equals(0)){
+            this.em.persist(libro);
+        } else {
+            this.em.merge(libro);
+        }
+        return libro;
     }
 
     @Override
     public void eliminar(Long id) {
-
+        this.buscarPorID(id).ifPresent(a -> this.em.remove(a));
     }
 }
